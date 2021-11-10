@@ -17,22 +17,29 @@ module multiplier(
     assign mp_nibble = mp[3:0];
 
     always_comb begin
-        if (valid_in == 1) begin
-            mp_next = a;
-            mc_next = b;
-            acc_next = 0;
-            i_next = 0;
-        end
-        else if (i != 8) begin
-            acc_next = acc + mp_nibble * mc;
-            mp_next = mp>>4;
-            mc_next = mc<<4;
-            if (mp==0)
-                i_next=8;
-            else
-                i_next = i + 1;
-        
-        end
+
+        case(valid_in)
+            1'd1: begin
+                mp_next = a;
+                mc_next = b;
+                acc_next = 0;
+                i_next = 0;
+            end
+            default: begin
+                case(i)
+                    5'd8: begin end
+                    default: begin
+                        acc_next = acc + mp_nibble * mc;
+                        mp_next = mp>>4;
+                        mc_next = mc<<4;
+                        case(mp)
+                            31'd0: i_next = 8;
+                            default: i_next = i + 1;
+                        endcase                        
+                    end
+                endcase
+            end
+        endcase
     end
 
     always_ff  @(posedge clk) begin
@@ -40,13 +47,16 @@ module multiplier(
         mc <= mc_next;
         acc <= acc_next;
         i <= i_next;
-        if (i_next==8) begin
-            r <= acc_next;
-            valid_out <= 1;
-        end
-        else begin
-            r <= r;
-            valid_out <= 0;
-        end
+
+        case(i_next)
+            5'd8: begin
+                r <= acc_next;
+                valid_out <= 1;                
+            end
+            default: begin
+                r <= r;
+                valid_out <= 0;                
+            end
+        endcase
     end
 endmodule
