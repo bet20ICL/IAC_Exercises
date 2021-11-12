@@ -7,7 +7,7 @@ module alu(
 );
     logic[32:0] sum;
 
-    assign sum = a + (op==2 ? ~b : b);
+    assign sum = a + (op==2 ? ~b + 1: b);
 
     always_ff @(posedge clk) begin 
         if(op==0) begin
@@ -17,7 +17,7 @@ module alu(
         end else if (op==2) begin
             r<=sum[31:0];
         end else begin
-            r<=a&&b;
+            r<=a&b;
         end
     end
 

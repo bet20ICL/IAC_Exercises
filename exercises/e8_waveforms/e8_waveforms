@@ -1,0 +1,88 @@
+#! /usr/local/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1148-gef01dd1e-dirty)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/local/lib/ivl/system.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/local/lib/ivl/v2005_math.vpi";
+:vpi_module "/usr/local/lib/ivl/va_math.vpi";
+:vpi_module "/usr/local/lib/ivl/v2009.vpi";
+S_0x560a791c04d0 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x560a791e9c70 .scope module, "e8_waveforms" "e8_waveforms" 3 1;
+ .timescale 0 0;
+v0x560a791fd550_0 .var "a", 4 0;
+v0x560a791fd630_0 .var "b", 4 0;
+v0x560a791fd700_0 .var/i "i", 31 0;
+v0x560a791fd7d0_0 .var/i "ii", 31 0;
+v0x560a791fd8b0_0 .net "x", 2 0, L_0x560a791fdca0;  1 drivers
+v0x560a791fd9c0_0 .net "y", 2 0, L_0x560a791fe010;  1 drivers
+S_0x560a791e9e00 .scope module, "func" "f" 3 9, 4 1 0, S_0x560a791e9c70;
+ .timescale 0 0;
+    .port_info 0 /INPUT 5 "a";
+    .port_info 1 /INPUT 5 "b";
+    .port_info 2 /OUTPUT 3 "x";
+    .port_info 3 /OUTPUT 3 "y";
+v0x560a791aecf0_0 .net *"_ivl_1", 2 0, L_0x560a791fda90;  1 drivers
+v0x560a791fce50_0 .net *"_ivl_3", 2 0, L_0x560a791fdbb0;  1 drivers
+v0x560a791fcf30_0 .net *"_ivl_7", 2 0, L_0x560a791fdea0;  1 drivers
+v0x560a791fd020_0 .net *"_ivl_9", 2 0, L_0x560a791fdf70;  1 drivers
+v0x560a791fd100_0 .net "a", 4 0, v0x560a791fd550_0;  1 drivers
+v0x560a791fd230_0 .net "b", 4 0, v0x560a791fd630_0;  1 drivers
+v0x560a791fd310_0 .net "x", 2 0, L_0x560a791fdca0;  alias, 1 drivers
+v0x560a791fd3f0_0 .net "y", 2 0, L_0x560a791fe010;  alias, 1 drivers
+L_0x560a791fda90 .part v0x560a791fd550_0, 0, 3;
+L_0x560a791fdbb0 .part v0x560a791fd630_0, 0, 3;
+L_0x560a791fdca0 .arith/sum 3, L_0x560a791fda90, L_0x560a791fdbb0;
+L_0x560a791fdea0 .part v0x560a791fd550_0, 2, 3;
+L_0x560a791fdf70 .part v0x560a791fd630_0, 2, 3;
+L_0x560a791fe010 .arith/sum 3, L_0x560a791fdea0, L_0x560a791fdf70;
+    .scope S_0x560a791e9c70;
+T_0 ;
+    %vpi_call/w 3 12 "$dumpfile", "e8_waveforms.vcd" {0 0 0};
+    %vpi_call/w 3 13 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x560a791e9c70 {0 0 0};
+    %delay 1, 0;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x560a791fd700_0, 0, 32;
+T_0.0 ;
+    %load/vec4 v0x560a791fd700_0;
+    %cmpi/u 32, 0, 32;
+    %jmp/0xz T_0.1, 5;
+    %load/vec4 v0x560a791fd700_0;
+    %pad/s 5;
+    %store/vec4 v0x560a791fd550_0, 0, 5;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x560a791fd7d0_0, 0, 32;
+T_0.2 ;
+    %load/vec4 v0x560a791fd7d0_0;
+    %cmpi/u 32, 0, 32;
+    %jmp/0xz T_0.3, 5;
+    %load/vec4 v0x560a791fd7d0_0;
+    %pad/s 5;
+    %store/vec4 v0x560a791fd630_0, 0, 5;
+    %delay 1, 0;
+    ; show_stmt_assign_vector: Get l-value for compressed += operand
+    %load/vec4 v0x560a791fd7d0_0;
+    %pushi/vec4 1, 0, 32;
+    %add;
+    %store/vec4 v0x560a791fd7d0_0, 0, 32;
+    %jmp T_0.2;
+T_0.3 ;
+    ; show_stmt_assign_vector: Get l-value for compressed += operand
+    %load/vec4 v0x560a791fd700_0;
+    %pushi/vec4 1, 0, 32;
+    %add;
+    %store/vec4 v0x560a791fd700_0, 0, 32;
+    %jmp T_0.0;
+T_0.1 ;
+    %vpi_call/w 3 22 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "-";
+    "e8_waveforms.v";
+    "f.v";

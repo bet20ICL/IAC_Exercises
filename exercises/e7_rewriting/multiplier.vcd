@@ -1,5 +1,5 @@
 $date
-	Wed Nov 10 10:37:25 2021
+	Wed Nov 10 16:23:56 2021
 $end
 $version
 	Icarus Verilog
@@ -36,9 +36,9 @@ $enddefinitions $end
 #0
 $dumpvars
 bx 2
-bx 1
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxx 1
 bx 0
-bx /
+bx0000 /
 bx .
 bx -
 bx ,
@@ -55,7 +55,11 @@ bx "
 x!
 $end
 #15
+bx00000000 /
+b0xxxxxxxxxxxxxxxxxxxxxxxx 1
 0!
+bx0000 .
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxx 0
 1%
 #16
 b0 -
